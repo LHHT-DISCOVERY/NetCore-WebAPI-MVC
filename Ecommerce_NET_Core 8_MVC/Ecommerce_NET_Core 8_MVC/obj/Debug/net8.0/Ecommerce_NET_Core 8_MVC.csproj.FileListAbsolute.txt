@@ -1,0 +1,31 @@
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\bin\Debug\net8.0\appsettings.Development.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\bin\Debug\net8.0\appsettings.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\bin\Debug\net8.0\Ecommerce_NET_Core 8_MVC.staticwebassets.runtime.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\bin\Debug\net8.0\Ecommerce_NET_Core 8_MVC.exe
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\bin\Debug\net8.0\Ecommerce_NET_Core 8_MVC.deps.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\bin\Debug\net8.0\Ecommerce_NET_Core 8_MVC.runtimeconfig.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\bin\Debug\net8.0\Ecommerce_NET_Core 8_MVC.dll
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\bin\Debug\net8.0\Ecommerce_NET_Core 8_MVC.pdb
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.GeneratedMSBuildEditorConfig.editorconfig
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.AssemblyInfoInputs.cache
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.AssemblyInfo.cs
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.csproj.CoreCompileInputs.cache
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.MvcApplicationPartsAssemblyInfo.cache
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.RazorAssemblyInfo.cache
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.RazorAssemblyInfo.cs
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.sourcelink.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\staticwebassets.build.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\staticwebassets.development.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\staticwebassets\msbuild.Ecommerce_NET_Core 8_MVC.Microsoft.AspNetCore.StaticWebAssets.props
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\staticwebassets\msbuild.build.Ecommerce_NET_Core 8_MVC.props
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Ecommerce_NET_Core 8_MVC.props
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Ecommerce_NET_Core 8_MVC.props
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\staticwebassets.pack.json
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\scopedcss\bundle\Ecommerce_NET_Core 8_MVC.styles.css
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\scopedcss\projectbundle\Ecommerce_NET_Core 8_MVC.bundle.scp.css
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.dll
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\refint\Ecommerce_NET_Core 8_MVC.dll
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.pdb
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\Ecommerce_NET_Core 8_MVC.genruntimeconfig.cache
+E:\NetCore-WebAPI-MVC\Ecommerce_NET_Core 8_MVC\Ecommerce_NET_Core 8_MVC\obj\Debug\net8.0\ref\Ecommerce_NET_Core 8_MVC.dll
