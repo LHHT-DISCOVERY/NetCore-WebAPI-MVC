@@ -77,3 +77,30 @@ public void addRDFData() {
 public List<Statement> queryRDFData() {
     // Sử dụng repositoryConnection để truy vấn dữ liệu RDF
 }
+
+=====================
+
+GraphDB:
+
+Trang chính thức của GraphDB: https://www.ontotext.com/products/graphdb/
+Tài liệu chính thức của GraphDB: https://graphdb.ontotext.com/documentation/
+
+SPARQL:
+
+Đây là tài liệu chính thức từ W3C, cung cấp một hướng dẫn chi tiết về ngôn ngữ truy vấn SPARQL : https://www.w3.org/TR/sparql11-query/
+Trang web này cung cấp một số ví dụ cụ thể về cách sử dụng SPARQL để truy vấn dữ liệu RDF : https://www.w3.org/2009/Talks/0615-qbe/
+Wikibooks cung cấp một tài liệu SPARQL mở và cộng đồng : https://en.wikibooks.org/wiki/SPARQL
+
+
+Spring Boot:
+Trang chính thức của Spring Boot: https://spring.io/projects/spring-boot
+Hướng dẫn chính thức của Spring Boot: https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html
+
+
+FastAPI:
+
+Trang chính thức của FastAPI: https://fastapi.tiangolo.com/
+Tài liệu chính thức của FastAPI: https://fastapi.tiangolo.com/tutorial/
+
+RDFLib (Python):
+Tài liệu chính thức của RDFLib: https://rdflib.readthedocs.io/
