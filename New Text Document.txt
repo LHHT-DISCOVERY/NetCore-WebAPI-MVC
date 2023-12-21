@@ -1,0 +1,79 @@
+
+Để kết nối ứng dụng Spring Boot với GraphDB, bạn cần thực hiện một số bước cấu hình để xác định thông tin về kết nối và tương tác với cơ sở dữ liệu RDF của mình. Dưới đây là các bước cơ bản:
+
+1. Thêm Dependency
+Thêm dependency cho GraphDB và RDF4J vào file pom.xml của dự án Spring Boot:
+
+xml
+Copy code
+<dependency>
+    <groupId>com.ontotext.graphdb</groupId>
+    <artifactId>graphdb-free</artifactId>
+    <version>9.8.0</version>
+</dependency>
+<dependency>
+    <groupId>org.eclipse.rdf4j</groupId>
+    <artifactId>rdf4j-repository-sparql</artifactId>
+    <version>3.7.0</version>
+</dependency>
+2. Cấu hình Ứng dụng Spring Boot
+Thêm các thông tin cấu hình cho kết nối GraphDB vào file application.properties:
+
+properties
+Copy code
+spring.datasource.url=jdbc:graphdb://localhost:7200/your-repository
+spring.datasource.username=your-username
+spring.datasource.password=your-password
+3. Tạo Cấu Hình Kết Nối
+Tạo một file cấu hình để xác định cách ứng dụng của bạn sẽ kết nối với GraphDB. Ví dụ:
+
+java
+Copy code
+@Configuration
+public class GraphDBConfig {
+
+    @Value("${spring.datasource.url}")
+    private String url;
+
+    @Value("${spring.datasource.username}")
+    private String username;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    @Bean
+    public RepositoryConnection repositoryConnection() {
+        Repository repository = new SPARQLRepository(url, username, password);
+        repository.initialize();
+        return repository.getConnection();
+    }
+}
+4. Sử dụng Repository Connection trong Service hoặc Controller
+Inject RepositoryConnection vào các bean Spring để thực hiện các thao tác với cơ sở dữ liệu RDF:
+
+java
+Copy code
+@Service
+public class RDFService {
+
+    private final RepositoryConnection repositoryConnection;
+
+    @Autowired
+    public RDFService(RepositoryConnection repositoryConnection) {
+        this.repositoryConnection = repositoryConnection;
+    }
+
+    // Thực hiện các thao tác với repositoryConnection
+}
+5. Thực Hiện Các Thao Tác với RDF
+Sử dụng repositoryConnection để thực hiện các thao tác như thêm, sửa, xóa, truy vấn dữ liệu RDF.
+
+java
+Copy code
+public void addRDFData() {
+    // Sử dụng repositoryConnection để thêm dữ liệu RDF
+}
+
+public List<Statement> queryRDFData() {
+    // Sử dụng repositoryConnection để truy vấn dữ liệu RDF
+}
