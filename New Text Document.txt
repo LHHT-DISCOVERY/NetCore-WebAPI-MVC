@@ -1,0 +1,179 @@
+resources: ${ISEARCH_RESOURCES:/var/isearch}
+gate:
+    pipelinePoolSize: 2
+    gazetteer:
+        caseInsensitive: true
+ontology:
+    mode: sparql
+    sparqlendpoint:
+        select: http://${ISEARCH_BLAZEGRAPH_ENDPOINT:localhost:8080}/blazegraph/namespace/isearch/sparql/
+        update: http://${ISEARCH_BLAZEGRAPH_ENDPOINT:localhost:8080}/blazegraph/namespace/isearch/sparql
+    baseURI: http://www.taiger.com/ontologies/nipsea/ontology#
+    baseURIPrefix: nipsea
+    ontologyPath: /ontology/NipSEAOntology_Full.ttl
+    bidirectional:
+        properties:
+            - hasReference,referencedIn
+isearch:
+    search:
+        clearCacheEndpoint: http://${ISEARCH_SEARCH_ENDPOINT:localhost:8080/isearch-search}/rebuildConceptCache
+    elasticsearch:
+        scheme: ${ISEARCH_ELASTICSEARCH_SCHEME:http} # or https
+        host: ${ISEARCH_ELASTICSEARCH:10.1.55.173}
+        port: 9200
+        sniff: # for es cluster
+            enable: false # false if on docker, behind a proxy, cloud providers, client & severs on diff network, no permissions to access the nodes API
+            intervalMillis: 5000
+        authentication: # need to generate the id & key with es username & password on this api _security/api_key
+            enable: false
+            api-key:
+                id: ${ISEARCH_ELASTICSEARCH_AUTH_ID:need_to_get_api_key}
+                key: ${ISEARCH_ELASTICSEARCH_AUTH_KEY:need_to_get_api_key}
+            useBasicAuth: false
+            username:
+            password:
+        clusterName: elasticsearch
+        suggest:
+            index: isearch_suggest
+            documentType: suggest
+        ontology:
+            index: isearch_ontology
+            documentType: element
+            extractionAnalyzer: ontology_extraction_analyzer
+relationshipviewer:
+    searchTermNodeColor: rgba(96,210,252,1)
+    otherTermNodeColor: rgb(151, 194, 252)
+    edgeColor: rgba(39,135,233,1)
+    edgeLength: 100
+nlp:
+    fullMatchMaxWeight: 15000       # Max Weight for fullMatchesCache
+    partialMatchMaxWeight: 35000    # Max Weight for partialMatchesCache
+icrs:
+    elasticsearch:
+        medicalOntologyIndex: 7_ontology
+        extractionAnalyzer: ontology_extraction_analyzer
+ giải thích đầy đủ đoạn code này
+=================================================================
+Đoạn mã cấu hình trên là một tập hợp các cấu hình cho một ứng dụng, là một ứng dụng liên quan đến việc tìm kiếm thông tin, sử dụng Elasticsearch và ontology trong quá trình xử lý dữ liệu. Dưới đây là giải thích đầy đủ từng phần của đoạn mã:
+
+Cấu hình resources:
+
+ISEARCH_RESOURCES: Đây là một biến môi trường hoặc giá trị mặc định (nếu không có giá trị) được sử dụng để định nghĩa đường dẫn tới tài nguyên của ứng dụng. Nếu không có giá trị, mặc định sẽ là /var/isearch.
+Cấu hình gate:
+
+pipelinePoolSize: Định nghĩa kích thước của pool (nhóm) pipeline là 2.
+gazetteer: Cấu hình cho mô-đun gazetteer của GATE.
+caseInsensitive: Nếu đặt là true, gazetteer sẽ không phân biệt chữ hoa và chữ thường.
+Cấu hình ontology:
+
+mode: Chế độ sử dụng ontology, trong trường hợp này là "sparql."
+sparqlendpoint: Cấu hình endpoint cho truy vấn SparQL.
+select: Địa chỉ cho truy vấn SparQL.
+update: Địa chỉ cho truy vấn SparQL cập nhật.
+baseURI: URI cơ bản của ontology.
+baseURIPrefix: Tiền tố của URI cơ bản.
+ontologyPath: Đường dẫn đến file ontology trong hệ thống tệp.
+Cấu hình bidirectional:
+
+properties: Danh sách các thuộc tính quan hệ hai chiều.
+Cấu hình isearch:
+
+search: Cấu hình cho việc tìm kiếm.
+clearCacheEndpoint: Địa chỉ để xóa cache khi cần tái tạo.
+elasticsearch: Cấu hình Elasticsearch.
+scheme: Giao thức sử dụng (http hoặc https).
+host: Địa chỉ host của Elasticsearch.
+port: Cổng kết nối đến Elasticsearch.
+sniff: Cấu hình cho Sniffing (theo dõi) Elasticsearch cluster.
+authentication: Cấu hình xác thực cho Elasticsearch.
+enable: Kích hoạt hoặc vô hiệu hóa xác thực.
+api-key: ID và Key cho xác thực API-key.
+useBasicAuth: Sử dụng xác thực cơ bản hay không.
+username: Tên người dùng cho xác thực cơ bản.
+password: Mật khẩu cho xác thực cơ bản.
+clusterName: Tên của cluster Elasticsearch.
+suggest: Cấu hình cho việc đề xuất (suggest).
+index: Tên index cho suggest.
+documentType: Loại tài liệu cho suggest.
+ontology: Cấu hình cho ontology trong Elasticsearch.
+index: Tên index cho ontology.
+documentType: Loại tài liệu cho ontology.
+extractionAnalyzer: Analyzer được sử dụng cho việc trích xuất ontology.
+Cấu hình relationshipviewer:
+
+Cấu hình màu sắc và độ dài của các nút và cạnh trong trình xem mối quan hệ.
+Cấu hình nlp:
+
+Cấu hình cho xử lý ngôn ngữ tự nhiên (NLP).
+fullMatchMaxWeight: Trọng số tối đa cho cặp giống đầy đủ.
+partialMatchMaxWeight: Trọng số tối đa cho cặp giống một phần.
+Cấu hình icrs:
+
+Cấu hình Elasticsearch cho một lĩnh vực cụ thể (medicalOntologyIndex và extractionAnalyzer).
+Tóm lại, đoạn mã cấu hình này chứa các thông số quan trọng cho việc triển khai và cấu hình của ứng dụng, đặc biệt là trong việc sử dụng Elasticsearch và ontology.
+
+User
+vậy việc sử dụng Elasticsearch và ontology.
+
+
+
+
+======================================
+ nó có liên quan đến sparql ko ?
+
+Có, trong đoạn mã cấu hình bạn đã cung cấp, có một số phần liên quan đến SparQL, Elasticsearch và ontology. Dưới đây là một giải thích chi tiết:
+
+SparQL và Ontology:
+
+Phần cấu hình về ontology (ontology section) định nghĩa việc sử dụng SparQL trong ứng dụng:
+mode: sparql: Chế độ sử dụng là SparQL.
+sparqlendpoint: Địa chỉ của endpoint SparQL, bao gồm cả địa chỉ cho truy vấn (select) và cập nhật (update).
+baseURI: URI cơ bản của ontology.
+baseURIPrefix: Tiền tố của URI cơ bản.
+ontologyPath: Đường dẫn đến file ontology.
+Elasticsearch và Ontology:
+
+Các phần cấu hình liên quan đến Elasticsearch (elasticsearch section) cũng được xác định:
+scheme, host, port: Định nghĩa cách kết nối đến Elasticsearch.
+sniff: Cho phép hoặc vô hiệu hóa việc Sniffing (theo dõi) Elasticsearch cluster.
+authentication: Xác thực cho Elasticsearch, bao gồm cả việc sử dụng API-key và xác thực cơ bản.
+suggest: Cấu hình cho việc đề xuất (suggest) trong Elasticsearch.
+ontology: Cấu hình cho việc lưu trữ ontology trong Elasticsearch, bao gồm tên index và loại tài liệu.
+Cấu hình isearch và SparQL:
+
+Trong phần isearch, có một phần search định nghĩa endpoint để xóa cache khi cần tái tạo (clearCacheEndpoint). Điều này có thể liên quan đến quá trình xử lý và tương tác với ontology thông qua SparQL.
+Mối quan hệ giữa Elasticsearch và Ontology thông qua NLP:
+
+Cấu hình NLP (nlp section) có thể đặt ra các giả định về trọng số và cách xử lý ngôn ngữ tự nhiên. Việc này có thể liên quan đến việc tích hợp dữ liệu từ Elasticsearch và ontology để thực hiện các tác vụ xử lý ngôn ngữ tự nhiên.
+Tóm lại, trong ngữ cảnh của ứng dụng bạn cung cấp, có sự liên quan chặt chẽ giữa Elasticsearch, SparQL (được sử dụng cho ontology), và các phần khác của hệ thống để thực hiện các chức năng như tìm kiếm thông tin và xử lý ngôn ngữ tự nhiên.
+
+=================================
+
+ontology:
+    mode: sparql
+    sparqlendpoint:
+        select: http://${ISEARCH_BLAZEGRAPH_ENDPOINT:localhost:8080}/blazegraph/namespace/isearch/sparql/
+        update: http://${ISEARCH_BLAZEGRAPH_ENDPOINT:localhost:8080}/blazegraph/namespace/isearch/sparql
+    baseURI: http://www.taiger.com/ontologies/nipsea/ontology#
+    baseURIPrefix: nipsea
+    ontologyPath: /ontology/NipSEAOntology_Full.ttl
+Trong phần này:
+
+sparqlendpoint là một khối cấu hình chứa hai trường: select và update.
+select: Đây là địa chỉ của endpoint SparQL để thực hiện các truy vấn select.
+update: Đây là địa chỉ của endpoint SparQL để thực hiện các truy vấn cập nhật.
+Cả hai giá trị (select và update) đều có dạng URL và được xác định dựa trên biến môi trường ISEARCH_BLAZEGRAPH_ENDPOINT hoặc sử dụng giá trị mặc định nếu biến môi trường không được xác định.
+
+Cụ thể:
+
+${ISEARCH_BLAZEGRAPH_ENDPOINT:localhost:8080} là cú pháp YAML cho việc sử dụng giá trị của biến môi trường ISEARCH_BLAZEGRAPH_ENDPOINT. Nếu biến này không được định nghĩa, giá trị mặc định sẽ là localhost:8080.
+Ví dụ: Nếu biến môi trường ISEARCH_BLAZEGRAPH_ENDPOINT được đặt là example.com:9090, thì giá trị của sparqlendpoint sẽ là:
+
+yaml
+Copy code
+sparqlendpoint:
+    select: http://example.com:9090/blazegraph/namespace/isearch/sparql/
+    update: http://example.com:9090/blazegraph/namespace/isearch/sparql
+Nếu biến môi trường không được xác định, giá trị mặc định localhost:8080 sẽ được sử dụng.
+
+==============================================================
