@@ -159,3 +159,75 @@ Nếu bạn muốn hiển thị dữ liệu RDF, bạn có thể sử dụng th�
 Thực hiện kiểm thử cẩn thận của ứng dụng của bạn để đảm bảo tính ổn định và đúng đắn.
 Triển khai ứng dụng của bạn trên môi trường sản xuất.
 Lưu ý rằng quá trình triển khai cụ thể sẽ phụ thuộc vào yêu cầu cụ thể của dự án và cách bạn tổ chức dữ liệu RDF của mình. Đảm bảo đọc tài liệu và hướng dẫn chi tiết của các thư viện RDF và Spring Boot để có sự hiểu rõ nhất.
+
+
+=============================
+
+Dưới đây là giải thích chi tiết từng câu truy vấn SPARQL mà bạn đã đề cập:
+
+Lấy Tất Cả Các Dân Số và Diện Tích của Các Nước:
+sparql
+Copy code
+SELECT ?country ?countryLabel ?population ?area
+WHERE {
+  ?country wdt:P31 wd:Q3624078.          # Instance of country
+  OPTIONAL { ?country wdt:P1082 ?population. }  # Population
+  OPTIONAL { ?country wdt:P2046 ?area. }        # Area
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+?country: Biến đại diện cho thực thể quốc gia.
+?countryLabel: Nhãn của thực thể quốc gia trong tiếng Anh.
+?population: Biến đại diện cho dân số của quốc gia (nếu có).
+?area: Biến đại diện cho diện tích của quốc gia (nếu có).
+Trong phần WHERE:
+
+?country wdt:P31 wd:Q3624078.: Chọn tất cả các thực thể là quốc gia.
+OPTIONAL { ?country wdt:P1082 ?population. }: Lấy dân số của quốc gia (nếu có).
+OPTIONAL { ?country wdt:P2046 ?area. }: Lấy diện tích của quốc gia (nếu có).
+Phần SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } được sử dụng để lấy nhãn của quốc gia trong tiếng Anh.
+
+Liệt Kê Các Ngôn Ngữ và Số Người Nói:
+sparql
+Copy code
+SELECT ?language ?languageLabel ?speakers
+WHERE {
+  ?language wdt:P31 wd:Q34770.          # Instance of language
+  OPTIONAL { ?language wdt:P1098 ?speakers. }  # Number of speakers
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+?language: Biến đại diện cho thực thể ngôn ngữ.
+?languageLabel: Nhãn của thực thể ngôn ngữ trong tiếng Anh.
+?speakers: Biến đại diện cho số người nói ngôn ngữ (nếu có).
+Trong phần WHERE:
+
+?language wdt:P31 wd:Q34770.: Chọn tất cả các thực thể là ngôn ngữ.
+OPTIONAL { ?language wdt:P1098 ?speakers. }: Lấy số người nói của ngôn ngữ (nếu có).
+Phần SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } được sử dụng để lấy nhãn của ngôn ngữ trong tiếng Anh.
+
+Tìm Các Đối Tượng Kết Nối Giữa Hai Thực Thể:
+sparql
+Copy code
+SELECT ?connectedEntity ?connectedEntityLabel
+WHERE {
+  wd:Q42 ?predicate ?connectedEntity.  # Q42 is an example entity
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+?connectedEntity: Biến đại diện cho đối tượng được kết nối.
+?connectedEntityLabel: Nhãn của đối tượng được kết nối trong tiếng Anh.
+Trong phần WHERE:
+
+wd:Q42 ?predicate ?connectedEntity.: Chọn tất cả các đối tượng (?connectedEntity) mà Q42 có mối quan hệ với chúng thông qua một thuộc tính (?predicate).
+Phần SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } được sử dụng để lấy nhãn của đối tượng được kết nối trong tiếng Anh.
+
+Sắp Xếp và Giới Hạn Kết Quả:
+sparql
+Copy code
+SELECT ?country ?countryLabel ?area
+WHERE {
+  ?country wdt:P31 wd:Q3624078.          # Instance of country
+  ?country wdt:P2046 ?area.               # Area
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+ORDER BY DESC
+
+======================================== 
