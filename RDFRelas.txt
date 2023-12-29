@@ -230,4 +230,102 @@ WHERE {
 }
 ORDER BY DESC
 
-======================================== 
+========================================
+SearchSourceBuilder là một thành phần của API Java được cung cấp bởi Elasticsearch để xây dựng các truy vấn (queries) hoặc các yêu cầu tìm kiếm (search requests). Nó giúp bạn xây dựng cấu trúc của truy vấn và định rõ các tham số, điều kiện, và các tùy chọn khác của truy vấn.
+
+Dưới đây là một số chức năng chính của SearchSourceBuilder:
+
+Định Rõ Truy Vấn (Query): Bạn có thể thiết lập loại truy vấn (match, term, range, etc.) và các điều kiện của truy vấn để định rõ các tiêu chí tìm kiếm.
+
+Phân Trang và Sắp Xếp:
+
+Cài đặt from và size để kiểm soát kết quả trả về từ vị trí nào và có bao nhiêu kết quả.
+Thiết lập sort để sắp xếp kết quả theo một hoặc nhiều trường.
+Filter và Aggregation:
+
+Thêm các bộ lọc (filters) để hạn chế dữ liệu được tìm kiếm.
+Thực hiện các tác vụ tổng hợp (aggregation) để tính toán thống kê trên kết quả.
+Nguồn Trích Dẫn (Source):
+
+Chọn các trường (fields) cụ thể bạn muốn trả về trong kết quả tìm kiếm.
+Highlighting và Suggesting:
+
+Kích hoạt tính năng làm nổi bật (highlight) để làm nổi bật các từ khóa trong kết quả.
+Đặt gợi ý (suggestion) để đề xuất các từ hoặc giá trị.
+Boosting và Tìm Kiếm Tương Tác:
+
+Sử dụng boost để tăng cường trọng số cho một truy vấn hoặc một trường.
+Tích hợp với các loại truy vấn tương tác như fuzzy search.
+==================================
+Trong Elasticsearch, dữ liệu được lưu trữ trong các index. Mỗi index có thể chứa nhiều loại dữ liệu (documents) và được tạo ra để phục vụ một mục đích cụ thể. Khi thực hiện các hoạt động tìm kiếm, truy vấn hoặc cập nhật, bạn cần chỉ định index mà bạn muốn thao tác.
+
+Trong đoạn mã bạn đề cập, có một dòng mã như sau:
+
+java
+Copy code
+SearchRequest searchRequest = new SearchRequest("your_index_name");
+Ở đây, "your_index_name" là một chuỗi đại diện cho tên của index bạn muốn thực hiện truy vấn tìm kiếm. Bạn cần thay thế "your_index_name" bằng tên thực tế của index mà bạn muốn tìm kiếm.
+
+Mục đích của việc chỉ định tên index là xác định nơi bạn muốn thực hiện truy vấn. Elasticsearch có thể chứa nhiều index khác nhau, và việc chọn index cụ thể sẽ làm giảm phạm vi của truy vấn và chỉ tìm kiếm trong dữ liệu của index đó. Điều này làm tăng hiệu suất và giảm thời gian thực hiện truy vấn, đặc biệt là khi có một lượng lớn dữ liệu.
+
+Ví dụ, nếu bạn có một index có tên "logs" để lưu trữ logs hệ thống và một index khác "products" để lưu trữ thông tin về sản phẩm, việc chỉ định index sẽ xác định xem bạn đang tìm kiếm trong logs hay trong dữ liệu sản phẩm.
+============================
+Dưới đây là một ví dụ cụ thể để giúp hiểu rõ hơn về việc chỉ định tên của index trong Elasticsearch và mục đích của nó:
+
+Giả sử bạn có một ứng dụng lưu trữ thông tin về sách và người đọc. Bạn có thể chọn tạo hai index riêng biệt: một cho sách ("books") và một cho người đọc ("readers"). Mỗi index chứa các documents tương ứng với sách hoặc người đọc.
+
+Tạo Index "books" cho Sách:
+
+java
+Copy code
+// Tạo một đối tượng IndexRequest để định nghĩa index "books"
+IndexRequest request = new IndexRequest("books");
+
+// Thêm thông tin về sách vào document
+Map<String, Object> bookData = new HashMap<>();
+bookData.put("title", "The Great Gatsby");
+bookData.put("author", "F. Scott Fitzgerald");
+bookData.put("publish_year", 1925);
+
+// Đặt dữ liệu vào index "books"
+request.source(bookData, XContentType.JSON);
+
+// Thực hiện thêm dữ liệu vào index "books"
+IndexResponse response = elasticsearchClient.index(request, RequestOptions.DEFAULT);
+Tạo Index "readers" cho Người Đọc:
+
+java
+Copy code
+// Tạo một đối tượng IndexRequest để định nghĩa index "readers"
+IndexRequest request = new IndexRequest("readers");
+
+// Thêm thông tin về người đọc vào document
+Map<String, Object> readerData = new HashMap<>();
+readerData.put("name", "Alice");
+readerData.put("age", 30);
+readerData.put("favorite_genre", "Mystery");
+
+// Đặt dữ liệu vào index "readers"
+request.source(readerData, XContentType.JSON);
+
+// Thực hiện thêm dữ liệu vào index "readers"
+IndexResponse response = elasticsearchClient.index(request, RequestOptions.DEFAULT);
+Truy Vấn Dữ Liệu từ Các Index Khác Nhau:
+
+Bây giờ, khi bạn muốn thực hiện một truy vấn, bạn có thể chỉ định index mà bạn muốn tìm kiếm. Ví dụ, nếu bạn chỉ quan tâm đến thông tin sách, bạn chỉ định index là "books":
+
+java
+Copy code
+SearchRequest searchRequest = new SearchRequest("books");
+// ... thiết lập các điều kiện tìm kiếm và thực hiện truy vấn
+SearchResponse searchResponse = elasticsearchClient.search(searchRequest, RequestOptions.DEFAULT);
+Ngược lại, nếu bạn chỉ quan tâm đến thông tin về người đọc, bạn chỉ định index là "readers":
+
+java
+Copy code
+SearchRequest searchRequest = new SearchRequest("readers");
+// ... thiết lập các điều kiện tìm kiếm và thực hiện truy vấn
+SearchResponse searchResponse = elasticsearchClient.search(searchRequest, RequestOptions.DEFAULT);
+Như vậy, việc chỉ định tên của index trong Elasticsearch giúp xác định nơi bạn muốn thực hiện truy vấn, và nó giúp giảm phạm vi tìm kiếm đến dữ liệu cụ thể mà bạn quan tâm.
+
+================================================= 
