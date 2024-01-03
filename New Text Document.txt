@@ -410,3 +410,62 @@ Copy code
 <http://example.org/subject> <http://example.org/predicate> "Object Value" .
 Trong ví dụ này, "http://example.org/subject" là đối tượng, "http://example.org/predicate" là thuộc tính, và "Object Value" là giá trị. Dấu chấm ở cuối biểu thị sự kết thúc của một triple.
 Tóm lại, ".ttl" (Turtle) là một định dạng cú pháp cụ thể của RDF, cung cấp cách biểu diễn dữ liệu RDF một cách ngắn gọn và đơn giản, giúp làm cho việc tạo và đọc dữ liệu RDF trở nên thuận tiện.
+==========================================================================
+convert sparQl to Solr format
+==========================================
+import json
+from collections import defaultdict
+
+# Đọc dữ liệu từ file JSON (.srj)
+with open('path/to/your/file.srj', 'r', encoding='utf-8') as file:
+    sparql_results = json.load(file)
+
+# Sử dụng defaultdict để nhóm altLabels theo bodyPart
+grouped_data = defaultdict(list)
+for result in sparql_results["results"]["bindings"]:
+    bodypart_uri = result["bodypart"]["value"]
+    alt_label = result["altLabel"]["value"]
+    grouped_data[bodypart_uri].append(alt_label)
+
+# Chuyển đổi dữ liệu nhóm thành định dạng Solr
+solr_data = [{"bodypart": bodypart_uri, "altLabel": alt_labels} for bodypart_uri, alt_labels in grouped_data.items()]
+
+# In 
+print(json.dumps(solr_data, indent=2))
+#lưu dữ liệu Solr
+output_file_path = 'path/to/your/output_file.json'
+with open(output_file_path, 'w', encoding='utf-8') as output_file:
+    json.dump(solr_data, output_file, indent=2)
+print(f"Dữ liệu Solr đã được lưu vào file mới tại: {output_file_path}")
+================================================================
+Sau khi bạn có dữ liệu này, bạn có thể sử dụng giao diện quản trị của Amazon Kendra để thêm đồng nghĩa. Trong Kendra Console:
+
+Mở tài nguyên Kendra của bạn.
+Chọn tab "Synonyms" ở cột bên trái.
+Nhấp vào "Add Synonyms" và nhập hoặc tải lên dữ liệu Solr đã định dạng của bạn.\
+========================================================================
+Khi tích hợp với Solr sử dụng Amazon Kendra, bạn có thể sử dụng API Kendra để tìm kiếm và lấy dữ liệu từ Solr. Dưới đây là một hướng dẫn tổng quan:
+
+Tích hợp với Solr sử dụng API Kendra:
+Xác định và Chuẩn bị Endpoint Solr:
+
+Xác định và chuẩn bị endpoint của Solr mà bạn muốn tích hợp với Kendra.
+Cấu hình Chỉ Mục Kendra:
+
+Trong giao diện người dùng Kendra hoặc sử dụng API Kendra, cấu hình chỉ mục để liên kết với Solr. Điều này có thể bao gồm thông tin như địa chỉ Solr, thông tin xác thực, và các cấu hình khác.
+Sử Dụng API Kendra để Tìm Kiếm và Lấy Dữ Liệu:
+
+Sử dụng API Kendra, đặc biệt là các phương thức như Query, để thực hiện tìm kiếm trên dữ liệu Solr. Bạn có thể truyền các thông số tìm kiếm, và Kendra sẽ tìm kiếm dữ liệu trong Solr và trả về kết quả.
+Xử Lý và Hiển Thị Kết Quả:
+
+Xử lý kết quả trả về từ Kendra API và hiển thị chúng theo yêu cầu của ứng dụng của bạn.
+Sử dụng Giao diện Người Dùng Kendra:
+Mở Giao diện Người Dùng Kendra:
+
+Truy cập Giao diện Người dùng Kendra thông qua trình duyệt web.
+Chọn Chỉ Mục và Cấu Hình Solr:
+
+Chọn chỉ mục bạn muốn tích hợp với Solr và cấu hình thông tin liên quan đến Solr.
+Thực Hiện Tìm Kiếm:
+
+Sử dụng giao diện để thực hiện tìm kiếm trên dữ liệu Solr thông qua Kendra.
