@@ -549,3 +549,103 @@ Chọn trường Solr mà bạn muốn sử dụng như là từ đồng nghĩa.
 Thực Hiện Truy Vấn Kendra:
 
 Khi thực hiện truy vấn trong Kendra, nó sẽ sử dụng từ đồng nghĩa đã lập chỉ mục để mở rộng tìm kiếm và cải thiện kết quả.
+========================
+{
+  "head" : {
+    "vars" : [
+      "bodypart",
+      "altLabel"
+    ]
+  },
+  "results" : {
+    "bindings" : [
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartAbdomen"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "abdominal"
+        }
+      },
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartAbdomen"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "belly"
+        }
+      },
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartAbdomen"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "stomach"
+        }
+      },
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartAbdomen"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "tummy"
+        }
+      },
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartNavel"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "belly button"
+        }
+      },
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartNavel"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "umbilical"
+        }
+      },
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartNavel"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "umbilicus"
+        }
+      },
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartTrunk"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "body"
+        }
+      },
+      {
+        "bodypart" : {
+          "type" : "uri",
+          "value" : "http://www.taiger.com/ontology/medical#bodypartTrunk"
+        },
+        "altLabel" : {
+          "type" : "literal",
+          "value" : "torso"
+        }
+      }}
