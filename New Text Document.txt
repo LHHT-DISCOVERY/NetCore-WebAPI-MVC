@@ -469,3 +469,83 @@ Chọn chỉ mục bạn muốn tích hợp với Solr và cấu hình thông ti
 Thực Hiện Tìm Kiếm:
 
 Sử dụng giao diện để thực hiện tìm kiếm trên dữ liệu Solr thông qua Kendra.
+
+=========================================================================
+Để lập chỉ mục dữ liệu trong Solr, bạn có thể sử dụng một số công cụ và phương pháp. Dưới đây là hướng dẫn cơ bản:
+
+Sử Dụng bin/post Script:
+
+Solr cung cấp một tập lệnh gọi là bin/post script để lập chỉ mục dữ liệu từ các nguồn khác nhau. Bạn có thể chạy lệnh này từ thư mục bin của thư mục cài đặt Solr.
+
+> bin/post -c <tên-chỉ-mục> <đường-dẫn-đến-tệp-hoặc-thư-mục>
+
+Điều này sẽ lập chỉ mục dữ liệu từ tệp hoặc thư mục được chỉ định vào chỉ mục có tên <tên-chỉ-mục>.
+Sử Dụng Solr API:
+
+Bạn cũng có thể sử dụng API HTTP của Solr để lập chỉ mục dữ liệu. Sử dụng phương thức POST để gửi dữ liệu lên Solr.
+bash
+Copy code
+curl http://localhost:8983/solr/<tên-chỉ-mục>/update -d '
+[
+  {"id": "1", "field1": "value1", "field2": "value2"},
+  {"id": "2", "field1": "value3", "field2": "value4"},
+  ...
+]'
+Trong ví dụ trên, dữ liệu được gửi bằng cách sử dụng JSON array.
+
+
+======================================================================
+Khi bạn đã lập chỉ mục dữ liệu trong Solr và muốn sử dụng từ đồng nghĩa với Amazon Kendra, bạn cần thực hiện các bước sau:
+
+Định Dạng Từ Đồng Nghĩa:
+
+Đầu tiên, bạn cần xác định và định dạng từ đồng nghĩa của mình. Từ đồng nghĩa có thể được lưu trong một tệp synonyms.txt hoặc một tệp khác tương tự theo định dạng Solr.
+
+Ví dụ về nội dung tệp synonyms.txt:
+
+abdominal, belly, stomach, tummy
+belly button, umbilical, umbilicus
+body, torso
+
+Upload Tệp Từ Đồng Nghĩa vào Solr:
+
+Sử dụng Solr Admin hoặc API để tải lên tệp từ đồng nghĩa vào Solr. Bạn có thể thực hiện điều này bằng cách sử dụng trình duyệt và trang quản trị Solr hoặc thông qua các yêu cầu HTTP.
+Cấu Hình Synonyms trong Solr:
+
+Cấu hình Solr để sử dụng từ đồng nghĩa. Bạn có thể thêm cấu hình này trong tệp schema.xml của chỉ mục Solr của bạn hoặc sử dụng API để đặt cấu hình.
+
+Ví dụ về cấu hình trong schema.xml:
+
+
+<fieldType name="text_synonyms" class="solr.TextField" positionIncrementGap="100">
+  <analyzer>
+    <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+    <filter class="solr.SynonymGraphFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+  </analyzer>
+</fieldType>
+
+
+Trong ví dụ này, synonyms.txt là tệp chứa từ đồng nghĩa.
+Chọn Loại Trường để Áp Dụng Từ Đồng Nghĩa:
+
+Chọn loại trường trong chỉ mục Solr mà bạn muốn áp dụng từ đồng nghĩa. Sử dụng loại trường đã được cấu hình để sử dụng bộ từ đồng nghĩa.
+Lập Chỉ Mục Dữ Liệu và Áp Dụng Từ Đồng Nghĩa:
+
+Lập chỉ mục lại dữ liệu của bạn trong Solr sau khi áp dụng cấu hình từ đồng nghĩa. Điều này sẽ áp dụng từ đồng nghĩa vào chỉ mục.
+Kết Nối Kendra với Solr:
+
+Trong giao diện Kendra, cấu hình kết nối với chỉ mục Solr của bạn. Cung cấp thông tin như địa chỉ Solr, cổng, và bất kỳ thông số xác thực nào cần thiết.
+Sử Dụng Từ Đồng Nghĩa trong Truy Vấn Kendra:
+
+Khi bạn thực hiện truy vấn trong Kendra, từ đồng nghĩa sẽ được áp dụng tự động vào truy vấn của bạn, giúp cải thiện kết quả tìm kiếm.
+======================================================
+Sử Dụng Từ Đồng Nghĩa trong Amazon Kendra:
+Cấu Hình Solr Connection trong Kendra:
+
+Trong giao diện quản trị Kendra, cấu hình kết nối với Solr bằng cách cung cấp thông tin như địa chỉ Solr, cổng, và bất kỳ thông số xác thực nào cần thiết.
+Chọn Trường Solr Làm Từ Đồng Nghĩa:
+
+Chọn trường Solr mà bạn muốn sử dụng như là từ đồng nghĩa. Đảm bảo rằng trường này chứa thông tin từ đồng nghĩa đã được lập chỉ mục từ bước trước.
+Thực Hiện Truy Vấn Kendra:
+
+Khi thực hiện truy vấn trong Kendra, nó sẽ sử dụng từ đồng nghĩa đã lập chỉ mục để mở rộng tìm kiếm và cải thiện kết quả.

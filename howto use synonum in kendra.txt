@@ -1,0 +1,62 @@
+để tải lên dữ liệu định dạng Solr vào Amazon Kendra và sử dụng từ đồng nghĩa, bạn thường thực hiện các bước sau:
+=================================
+Chuẩn Bị Dữ Liệu Theo Định Dạng Solr:
+
+Đảm bảo rằng dữ liệu của bạn đang ở định dạng Solr mà bạn muốn sử dụng. Điều này có thể bao gồm việc chuyển đổi dữ liệu của bạn thành định dạng tương thích với Solr.
+=================================
+Thiết Lập Chỉ Mục Kendra:
+
+Trong bảng điều khiển Amazon Kendra, tạo một chỉ mục mới hoặc chọn một chỉ mục hiện tại mà bạn muốn tải lên dữ liệu của mình.
+=======================================
+Xác định Chỉ Mục Kendra:
+
+Đăng nhập vào AWS Management Console.
+Mở dịch vụ Amazon Kendra và chọn chỉ mục mà bạn muốn tải lên dữ liệu.
+=======================================
+Chuẩn bị Dữ Liệu Solr:
+
+Đảm bảo rằng dữ liệu của bạn tuân theo định dạng Solr và chứa các trường thông tin quan trọng cần được chỉ định cho chỉ mục Kendra.
+==========================================
+Sử Dụng Amazon Kendra Indexer:
+
+Sử dụng một Amazon Kendra Indexer để đọc dữ liệu từ Solr format và đưa vào chỉ mục Kendra.
+===========================================
+Thiết Lập Amazon Kendra Indexer:
+
+Cấu hình Indexer để nó hiểu định dạng dữ liệu Solr và ánh xạ các trường Solr với các thuộc tính Kendra.
+Điều này có thể được thực hiện thông qua giao diện dòng lệnh hoặc các tùy chọn cấu hình trong console.
+====================================
+Thực Hiện Tải Lên:
+
+Chạy Indexer để bắt đầu quá trình tải lên dữ liệu từ Solr format vào chỉ mục Kendra.
+=====================================
+Kiểm Tra và Theo Dõi:
+
+Theo dõi tiến trình tải lên và kiểm tra log để đảm bảo rằng không có lỗi xảy ra.
+Sau khi quá trình tải lên hoàn tất, bạn có thể thử nghiệm truy vấn trên chỉ mục Kendra để đảm bảo dữ liệu đã được thêm vào một cách chính xác.
+
+=====================================
+Cấu Hình Nguồn Dữ Liệu Trong Kendra:
+
+Cấu hình một nguồn dữ liệu trong Kendra để kết nối với Solr của bạn. Cung cấp thông tin cần thiết, chẳng hạn như địa chỉ Solr, cổng và bất kỳ tham số xác thực nào.
+Xác Định Schema Trong Kendra:
+
+Ánh xạ các trường từ định dạng Solr của bạn với schema của Kendra. Điều này liên quan đến việc xác định trường Solr tương ứng với các trường Kendra như title, content, và các trường khác.
+===============================================
+Tải Lên Dữ Liệu Lên Kendra:
+
+Sử dụng cấu hình nguồn dữ liệu của Kendra để đồng bộ hóa và tải lên dữ liệu định dạng Solr vào Kendra. Điều này thường có thể được thực hiện thông qua bảng điều khiển Kendra hoặc qua API Kendra.
+============================================
+Xác Định Từ Đồng Nghĩa Trong Kendra:
+
+Trong bảng điều khiển Kendra, điều hướng đến cài đặt chỉ mục và tìm phần Từ Đồng Nghĩa. Tải lên một tệp chứa các ánh xạ từ đồng nghĩa hoặc nhập chúng thủ công.
+
+Tệp có thể ở định dạng tương thích với Solr hoặc theo định dạng được xác định bởi Kendra. Tham khảo tài liệu Kendra để biết chi tiết về định dạng tệp từ đồng nghĩa.
+===========================================
+Kiểm Tra Các Truy Vấn với Từ Đồng Nghĩa:
+
+Sau khi tải lên dữ liệu và xác định từ đồng nghĩa, kiểm tra các truy vấn trong bảng điều khiển Kendra liên quan đến từ đồng nghĩa để đảm bảo Kendra nhận diện và sử dụng chúng đúng cách.
+=========================================
+Giám Sát và Tối Ưu Hóa:
+
+Giám sát hiệu suất của Kendra và tối ưu hóa ánh xạ từ đồng nghĩa cũng như trải nghiệm tìm kiếm dựa trên phản hồi và mô hình sử dụng của người dùng.
