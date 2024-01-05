@@ -229,3 +229,88 @@ Khi bạn nhận được kết quả từ Solr, bạn có thể xử lý nó đ
           "value" : "torso"
         }
       }}
+
+======================================================================================
+1. Chuẩn bị Dữ liệu:
+Xác định các trường dữ liệu từ kết quả SparQL mà bạn muốn đưa vào Solr. Điều này bao gồm cả tên trường và giá trị tương ứng.
+2. Sử dụng Thư viện Solr trong Ngôn ngữ Lập trình:
+Sử dụng PySolr trong Python:
+Cài đặt PySolr:
+
+bash
+Copy code
+pip install pysolr
+Viết mã Python để đưa dữ liệu vào Solr:
+
+python
+Copy code
+import pysolr
+
+# Kết nối đến Solr
+solr_url = "http://localhost:8983/solr/your_collection"
+solr = pysolr.Solr(solr_url, always_commit=True)
+
+# Lặp qua kết quả SparQL và đưa vào Solr
+for row in results:
+    subject, predicate, obj = row
+    solr.add([
+        {
+            "id": str(subject),
+            "predicate": str(predicate),
+            "object": str(obj)
+            # Thêm các trường khác nếu cần
+        }
+    ])
+
+Sử dụng SolrJ trong Java:
+Thêm Dependency:
+
+Thêm thư viện SolrJ vào dự án Java của bạn.
+Viết mã Java để đưa dữ liệu vào Solr:
+
+java
+Copy code
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrInputDocument;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+
+// Kết nối đến Solr
+String solrUrl = "http://localhost:8983/solr/your_collection";
+SolrClient solr = new HttpSolrClient.Builder(solrUrl).build();
+
+// Lặp qua kết quả SparQL và đưa vào Solr
+for (Row row : results) {
+    String subject = row.getSubject();
+    String predicate = row.getPredicate();
+    String obj = row.getObject();
+
+    SolrInputDocument document = new SolrInputDocument();
+    document.addField("id", subject);
+    document.addField("predicate", predicate);
+    document.addField("object", obj);
+    // Thêm các trường khác nếu cần
+
+    solr.add(document);
+}
+
+// Commit để lưu thay đổi
+solr.commit();
+3. Thực Hiện Commit:
+Trong Solr, sau khi thêm dữ liệu, bạn cần thực hiện commit để lưu các thay đổi vào index.
+4. Kiểm tra và Tối ưu hóa:
+Kiểm tra Solr để đảm bảo rằng dữ liệu đã được đưa vào đúng cách. Tối ưu hóa schema và cấu hình Solr để phản ánh cấu trúc dữ liệu của bạn và tối ưu hiệu suất truy vấn.
+
+=========================================
+{
+  "synonyms": [
+    {
+      "term": "Nhãn 1",
+      "synonyms": ["Nhãn Phần Tử 1", "Từ đồng nghĩa 1", "Từ đồng nghĩa 2"]
+    },
+    {
+      "term": "Nhãn 2",
+      "synonyms": ["Nhãn Phần Tử 2", "Từ đồng nghĩa 3", "Từ đồng nghĩa 4"]
+    }
+    // Thêm các mục khác nếu cần
+  ]
+}
